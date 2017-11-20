@@ -12,7 +12,7 @@ from papy.core import Plumber, Piper, Worker
 from papy.util.script import script
 from papy.util.func import ipasser, npasser
 
-VERSION = "2.4.3"
+VERSION = "2.5.0"
 CODE_DIR = path(os.getenv("CODE") or "/code")
 REFS_DIR = path(os.getenv("REFS") or "/refs")
 WORK_DIR = CODE_DIR / "workers"
@@ -20,14 +20,7 @@ WORK_DIR = CODE_DIR / "workers"
 EVALUATOR = "bash"
 PREAMBLE = """
 #!/usr/bin/env bash
-export CODE="%s"
-export R_PROFILE_USER=$CODE/conf/Rprofile
-export R_LIBS_USER=$CODE/libs/r
-export WORKON_HOME=$CODE/libs/python
-export PATH=$CODE/bin:$PATH
-source /etc/bash_completion.d/virtualenvwrapper
-workon crisp
-""" % (CODE_DIR,)
+""" 
 
 MERGES = {
      "read":np.array([False, False, False, False, False, True, True]),

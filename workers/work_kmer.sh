@@ -22,11 +22,11 @@ IFS=$'\n\t'
 
 date > ${OUT["main"]}
 
-jellyfish count --disk --text -o ${OUT['kmer1']}.tmp -s 10M -m ${PARAMS['k']} ${IN['fastq1']}
+jellyfish count -t 4 --disk --text -o ${OUT['kmer1']}.tmp -s 10M -m ${PARAMS['k']} ${IN['fastq1']}
 sed 's/}/\n/g' ${OUT['kmer1']}.tmp | tail -n +1 > ${OUT['kmer1']}
 rm ${OUT['kmer1']}.tmp
 
-jellyfish count --disk --text -o ${OUT['kmer2']}.tmp -s 10M -m ${PARAMS['k']} ${IN['fastq2']}
+jellyfish count -t 4 --disk --text -o ${OUT['kmer2']}.tmp -s 10M -m ${PARAMS['k']} ${IN['fastq2']}
 sed 's/}/\n/g' ${OUT['kmer2']}.tmp | tail -n +1 > ${OUT['kmer2']}
 rm ${OUT['kmer2']}.tmp
 
