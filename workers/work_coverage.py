@@ -31,9 +31,7 @@ def log_run(code_stdout_stderr_cmd):
     return code
 
 ###
-
 import numpy as np
-
 
 for ii in ("alig_csort", "chim_se_csort", "chim_pe_csort"):
     CMD1 = "samtools idxstats %s" % IN[ii]
@@ -45,16 +43,19 @@ for ii in ("alig_csort", "chim_se_csort", "chim_pe_csort"):
     counts = np.array(counts)
     MAPPED, _ = counts.sum(axis=0)
     
-    TMP = IN[ii] + ".cov"
+    TMP1 = IN[ii] + ".cov"
+    TMP2 = IN[ii] + ".cov.sort"
     AWK = '{print $1 "\t" $2 "\t" $3 "\t" ($4 * 1.0e6 / %s)}' % MAPPED
-    PAR = (IN[ii], PARAMS["chrom_length"], AWK, TMP)
+    PAR = (IN[ii], PARAMS["chrom_length"], AWK, TMP1)
 
     BAM2COV = "bedtools genomecov -bg -split -ibam %s -g %s | awk '%s' - > %s" % PAR
-    COV2BGR = "bedGraphToBigWig %s %s %s" % (TMP, PARAMS["chrom_length"], OUT[ii])
-    RM = "rm %s" % TMP
-
-    CMD = " && ".join([BAM2COV, COV2BGR, RM])
-    log_run(run_cmd(CMD))
+    log_run(run_cmd(BAM2COV))
+    SORTCOV = "sort -k1,1 -k2,2n %s > %s" % (TMP1, TMP2)
+    log_run(run_cmd(SORTCOV))
+    COV2BGR = "bedGraphToBigWig %s %s %s" % (TMP2, PARAMS["chrom_length"], OUT[ii])
+    log_run(run_cmd(COV2BGR))
+    RM = "rm %s %s" % (TMP1, TMP2)
+    log_run(run_cmd(RM))
 ###
 
 sys.exit()
