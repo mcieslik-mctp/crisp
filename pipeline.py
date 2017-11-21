@@ -654,7 +654,8 @@ def final(proc_dir, job1, jobn, n, stride, full_model, genome_idx, genome_seq, s
         "out":(
             ("main", "log"),
             ("aln.rep", "txt"),
-            ("fix.rep", "txt"),
+            ("fix1.rep", "txt"),
+            ("fix2.rep", "txt"),
             ("ext.rep", "txt"),
             ("asm.rep", "txt"),
             ("index", "bin"),

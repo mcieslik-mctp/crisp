@@ -83,8 +83,8 @@ mixcr filterAlignments -f -n 250000 -c IG  $TEMP_3 $TEMP_3B
 mixcr filterAlignments -f -n 250000 -c TCR $TEMP_3 $TEMP_3T
 rm $TEMP_3F
 mixcr mergeAlignments $TEMP_3B $TEMP_3T $TEMP_3F
-mixcr assemblePartial -f $TEMP_3F $TEMP_4
-mixcr assemblePartial -f -r ${OUT["fix.rep"]} $TEMP_4 $TEMP_5
+mixcr assemblePartial -f -r ${OUT["fix1.rep"]} $TEMP_3F $TEMP_4
+mixcr assemblePartial -f -r ${OUT["fix2.rep"]} $TEMP_4  $TEMP_5
 mixcr extendAlignments -f -r ${OUT["ext.rep"]} $TEMP_5 ${OUT["alig"]}
 mixcr assemble -f -t ${PARAMS["p"]} -i ${OUT["index"]} -r ${OUT["asm.rep"]} ${OUT["alig"]} ${OUT["clone"]}
 
