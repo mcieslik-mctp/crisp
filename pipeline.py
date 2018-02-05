@@ -12,7 +12,7 @@ from papy.core import Plumber, Piper, Worker
 from papy.util.script import script
 from papy.util.func import ipasser, npasser
 
-VERSION = "2.5.0"
+VERSION = "2.5.1"
 CODE_DIR = path(os.getenv("CODE") or "/code")
 REFS_DIR = path(os.getenv("REFS") or "/refs")
 WORK_DIR = CODE_DIR / "workers"
@@ -78,7 +78,7 @@ def dlog_run(code_stdout_stderr_cmd):
 
 def merge_sheet(lib_sheet, lib_merge):
     dlog("parsing lib sheet: %s merging: %s" % (lib_sheet, lib_merge))
-    tbl = np.array(pd.read_csv(lib_sheet, sep="\t", header=-1), dtype="str")
+    tbl = np.array(pd.read_csv(lib_sheet, sep="\t", header=-1), dtype="object")
     tbl[tbl == "nan"] = "NA"
     tbl = np.array(sorted(tbl.tolist()))
     ## single-end
